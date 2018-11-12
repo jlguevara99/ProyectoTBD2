@@ -1,6 +1,7 @@
 package proyectotbd2;
 
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.exceptions.NoHostAvailableException;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class cql {
         
         for (int i = 0; i < columnas.length; i++) {
             campos += columnas[i] + ",";
-            if (!(valores.get(i) instanceof Integer)) {
+            if (!(valores.get(i) instanceof Integer) && !(valores.get(i) instanceof Double)) {
                 values += "'" + valores.get(i) + "'" + ",";
             }else{
                 values += valores.get(i) + ",";
