@@ -835,9 +835,6 @@
                       </SubComponents>
                     </Container>
                     <Component class="javax.swing.JTextField" name="tf_lugar">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_lugarActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tf_sueldo">
                     </Component>
@@ -1226,9 +1223,6 @@
                       </SubComponents>
                     </Container>
                     <Component class="javax.swing.JTextField" name="tf_lugar1">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_lugar1ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="tf_sueldo1">
                     </Component>
@@ -1274,6 +1268,7 @@
                     <Component class="javax.swing.JButton" name="jb_aceptarE">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Aceptar"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_aceptarEMouseClicked"/>
@@ -1435,18 +1430,17 @@
                         <Component class="javax.swing.JTable" name="jt_listarPuesto">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="11" rowCount="0">
+                              <Table columnCount="10" rowCount="0">
                                 <Column editable="false" title="Numero" type="java.lang.Object"/>
                                 <Column editable="false" title="Tipo" type="java.lang.Object"/>
                                 <Column editable="false" title="Descripcion" type="java.lang.Object"/>
-                                <Column editable="false" title="CIF" type="java.lang.Object"/>
                                 <Column editable="false" title="Lugar" type="java.lang.Object"/>
-                                <Column editable="true" title="Academico" type="java.lang.Object"/>
-                                <Column editable="true" title="Sanitario" type="java.lang.Object"/>
-                                <Column editable="true" title="Legal" type="java.lang.Object"/>
-                                <Column editable="true" title="Profesional" type="java.lang.Object"/>
-                                <Column editable="true" title="Laboral" type="java.lang.Object"/>
-                                <Column editable="true" title="Condiciones" type="java.lang.Object"/>
+                                <Column editable="false" title="Academico" type="java.lang.Object"/>
+                                <Column editable="false" title="Sanitario" type="java.lang.Object"/>
+                                <Column editable="false" title="Legal" type="java.lang.Object"/>
+                                <Column editable="false" title="Profesional" type="java.lang.Object"/>
+                                <Column editable="false" title="Laboral" type="java.lang.Object"/>
+                                <Column editable="false" title="Condiciones" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
@@ -3460,6 +3454,12 @@
                                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                                   <Component id="jb_agregar_empresa" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel120" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="tf_correoe" min="-2" pref="122" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace pref="563" max="32767" attributes="0"/>
                       </Group>
@@ -3500,7 +3500,12 @@
                               <Component id="jLabel95" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="tf_clavee" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel120" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tf_correoe" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jb_agregar_empresa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="276" max="32767" attributes="0"/>
                       </Group>
@@ -3575,6 +3580,13 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_agregar_empresaMouseClicked"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel120">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Correo:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="tf_correoe">
                 </Component>
               </SubComponents>
             </Container>
@@ -3668,6 +3680,11 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jb_modificar_aceptar1" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel125" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="tf_correoe1" min="-2" pref="122" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -3715,7 +3732,12 @@
                                           <Component id="jLabel104" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="tf_clavee1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel125" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tf_correoe1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                               <Component id="jLabel105" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -3834,12 +3856,13 @@
                         <Component class="javax.swing.JTable" name="jt_eliminarE1">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="0">
+                              <Table columnCount="6" rowCount="0">
                                 <Column editable="false" title="Nombre" type="java.lang.Object"/>
                                 <Column editable="false" title="CIF" type="java.lang.Object"/>
                                 <Column editable="false" title="Director" type="java.lang.Object"/>
                                 <Column editable="false" title="Direccion" type="java.lang.Object"/>
                                 <Column editable="false" title="Telefono" type="java.lang.Object"/>
+                                <Column editable="true" title="Correo" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
@@ -3853,6 +3876,13 @@
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_cargar5MouseClicked"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel125">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Correo:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="tf_correoe1">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -3992,12 +4022,13 @@
                         <Component class="javax.swing.JTable" name="jt_eliminarE">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="0">
+                              <Table columnCount="6" rowCount="0">
                                 <Column editable="false" title="Nombre" type="java.lang.Object"/>
                                 <Column editable="false" title="CIF" type="java.lang.Object"/>
                                 <Column editable="false" title="Director" type="java.lang.Object"/>
                                 <Column editable="false" title="Direccion" type="java.lang.Object"/>
                                 <Column editable="false" title="Telefono" type="java.lang.Object"/>
+                                <Column editable="false" title="Correo" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
@@ -4063,12 +4094,13 @@
                     <Component class="javax.swing.JTable" name="jt_listarE">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="0">
+                          <Table columnCount="6" rowCount="0">
                             <Column editable="false" title="Nombre" type="java.lang.Object"/>
                             <Column editable="false" title="CIF" type="java.lang.Object"/>
                             <Column editable="false" title="Director" type="java.lang.Object"/>
                             <Column editable="false" title="Direccion" type="java.lang.Object"/>
                             <Column editable="false" title="Telefono" type="java.lang.Object"/>
+                            <Column editable="false" title="Correo" type="java.lang.Object"/>
                           </Table>
                         </Property>
                       </Properties>
@@ -4089,15 +4121,108 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="1013" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane39" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jb_cargar_tablas" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jb_seleccion" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane40" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="639" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane40" min="-2" max="-2" attributes="0"/>
+                              <Component id="jScrollPane39" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jb_cargar_tablas" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jb_seleccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="148" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane39">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jt_listarpersonas1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="5" rowCount="0">
+                            <Column editable="false" title="Numero" type="java.lang.Object"/>
+                            <Column editable="false" title="Id" type="java.lang.Object"/>
+                            <Column editable="false" title="Descripcion" type="java.lang.Object"/>
+                            <Column editable="false" title="Deseos" type="java.lang.Object"/>
+                            <Column editable="false" title="Limitaciones" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JScrollPane" name="jScrollPane40">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jt_listarPuesto1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="11" rowCount="0">
+                            <Column editable="false" title="Numero" type="java.lang.Object"/>
+                            <Column editable="false" title="Tipo" type="java.lang.Object"/>
+                            <Column editable="false" title="Descripcion" type="java.lang.Object"/>
+                            <Column editable="false" title="CIF" type="java.lang.Object"/>
+                            <Column editable="false" title="Lugar" type="java.lang.Object"/>
+                            <Column editable="false" title="Academico" type="java.lang.Object"/>
+                            <Column editable="false" title="Sanitario" type="java.lang.Object"/>
+                            <Column editable="false" title="Legal" type="java.lang.Object"/>
+                            <Column editable="false" title="Profesional" type="java.lang.Object"/>
+                            <Column editable="false" title="Laboral" type="java.lang.Object"/>
+                            <Column editable="false" title="Condiciones" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JButton" name="jb_cargar_tablas">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cargar Tablas"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_cargar_tablasMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jb_seleccion">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Selecci&#xf3;n"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_seleccionMouseClicked"/>
+                  </Events>
+                </Component>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>
@@ -4457,6 +4582,7 @@
                     <Component class="javax.swing.JButton" name="jb_aceptarP">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Aceptar"/>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_aceptarPMouseClicked"/>
@@ -4598,7 +4724,7 @@
                               <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                               <Component id="jScrollPane30" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="44" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jb_cargarPT" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -4608,7 +4734,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jb_cargarPT" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane30" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -4637,12 +4763,12 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="jb_cargarPT">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cargar"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_cargarPTMouseClicked"/>
                       </Events>
                     </Component>
                   </SubComponents>

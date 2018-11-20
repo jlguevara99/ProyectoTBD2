@@ -5,7 +5,16 @@ import static com.datastax.driver.core.querybuilder.QueryBuilder.now;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.uuid;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.UUID;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -337,6 +346,8 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         ta_direccion = new javax.swing.JTextArea();
         jb_agregar_empresa = new javax.swing.JButton();
+        jLabel120 = new javax.swing.JLabel();
+        tf_correoe = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel98 = new javax.swing.JLabel();
@@ -360,6 +371,8 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane14 = new javax.swing.JScrollPane();
         jt_eliminarE1 = new javax.swing.JTable();
         jb_cargar5 = new javax.swing.JButton();
+        jLabel125 = new javax.swing.JLabel();
+        tf_correoe1 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel96 = new javax.swing.JLabel();
@@ -374,6 +387,12 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane12 = new javax.swing.JScrollPane();
         jt_listarE = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
+        jScrollPane39 = new javax.swing.JScrollPane();
+        jt_listarpersonas1 = new javax.swing.JTable();
+        jScrollPane40 = new javax.swing.JScrollPane();
+        jt_listarPuesto1 = new javax.swing.JTable();
+        jb_cargar_tablas = new javax.swing.JButton();
+        jb_seleccion = new javax.swing.JButton();
         jd_persona2 = new javax.swing.JDialog();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel32 = new javax.swing.JPanel();
@@ -412,7 +431,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel39 = new javax.swing.JPanel();
         jScrollPane30 = new javax.swing.JScrollPane();
         jt_listarpersonas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jb_cargarPT = new javax.swing.JButton();
         jPanel36 = new javax.swing.JPanel();
         jPanel40 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -777,12 +796,6 @@ public class Principal extends javax.swing.JFrame {
         ta_profesionales.setRows(5);
         jScrollPane21.setViewportView(ta_profesionales);
 
-        tf_lugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_lugarActionPerformed(evt);
-            }
-        });
-
         ta_condiciones.setColumns(20);
         ta_condiciones.setRows(5);
         jScrollPane22.setViewportView(ta_condiciones);
@@ -963,12 +976,6 @@ public class Principal extends javax.swing.JFrame {
         ta_profesionales1.setRows(5);
         jScrollPane37.setViewportView(ta_profesionales1);
 
-        tf_lugar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_lugar1ActionPerformed(evt);
-            }
-        });
-
         ta_condiciones1.setColumns(20);
         ta_condiciones1.setRows(5);
         jScrollPane38.setViewportView(ta_condiciones1);
@@ -983,6 +990,7 @@ public class Principal extends javax.swing.JFrame {
         cb_modificarE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alto", "Medio", "Bajo" }));
 
         jb_aceptarE.setText("Aceptar");
+        jb_aceptarE.setEnabled(false);
         jb_aceptarE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jb_aceptarEMouseClicked(evt);
@@ -1178,11 +1186,11 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero", "Tipo", "Descripcion", "CIF", "Lugar", "Academico", "Sanitario", "Legal", "Profesional", "Laboral", "Condiciones"
+                "Numero", "Tipo", "Descripcion", "Lugar", "Academico", "Sanitario", "Legal", "Profesional", "Laboral", "Condiciones"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2387,6 +2395,8 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jLabel120.setText("Correo:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -2430,7 +2440,12 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(tf_clavee, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(jb_agregar_empresa)))
+                        .addComponent(jb_agregar_empresa))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel120)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tf_correoe, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(563, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -2462,7 +2477,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel95)
                     .addComponent(tf_clavee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel120)
+                    .addComponent(tf_correoe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_agregar_empresa)
                 .addContainerGap(276, Short.MAX_VALUE))
         );
@@ -2511,11 +2530,11 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "CIF", "Director", "Direccion", "Telefono"
+                "Nombre", "CIF", "Director", "Direccion", "Telefono", "Correo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2530,6 +2549,8 @@ public class Principal extends javax.swing.JFrame {
                 jb_cargar5MouseClicked(evt);
             }
         });
+
+        jLabel125.setText("Correo:");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -2574,7 +2595,11 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jb_modificar_empresa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jb_modificar_aceptar1)))
+                        .addComponent(jb_modificar_aceptar1))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel125)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tf_correoe1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jb_cargar5)
@@ -2612,7 +2637,11 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel104)
                             .addComponent(tf_clavee1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel125)
+                            .addComponent(tf_correoe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel105)
@@ -2672,11 +2701,11 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "CIF", "Director", "Direccion", "Telefono"
+                "Nombre", "CIF", "Director", "Direccion", "Telefono", "Correo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2765,11 +2794,11 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "CIF", "Director", "Direccion", "Telefono"
+                "Nombre", "CIF", "Director", "Direccion", "Telefono", "Correo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -2803,15 +2832,84 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Listar Empresas", jPanel9);
 
+        jt_listarpersonas1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero", "Id", "Descripcion", "Deseos", "Limitaciones"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane39.setViewportView(jt_listarpersonas1);
+
+        jt_listarPuesto1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero", "Tipo", "Descripcion", "CIF", "Lugar", "Academico", "Sanitario", "Legal", "Profesional", "Laboral", "Condiciones"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane40.setViewportView(jt_listarPuesto1);
+
+        jb_cargar_tablas.setText("Cargar Tablas");
+        jb_cargar_tablas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_cargar_tablasMouseClicked(evt);
+            }
+        });
+
+        jb_seleccion.setText("Selección");
+        jb_seleccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_seleccionMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1013, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jb_cargar_tablas)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_seleccion)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 639, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_cargar_tablas)
+                    .addComponent(jb_seleccion))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Selección", jPanel10);
@@ -2934,6 +3032,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane28.setViewportView(ta_limitacionesM);
 
         jb_aceptarP.setText("Aceptar");
+        jb_aceptarP.setEnabled(false);
         jb_aceptarP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jb_aceptarPMouseClicked(evt);
@@ -3015,7 +3114,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel33.setLayout(jPanel33Layout);
         jPanel33Layout.setHorizontalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel38, javax.swing.GroupLayout.PREFERRED_SIZE, 695, Short.MAX_VALUE)
+            .addComponent(jPanel38, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
         );
         jPanel33Layout.setVerticalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3094,10 +3193,10 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane30.setViewportView(jt_listarpersonas);
 
-        jButton1.setText("Cargar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jb_cargarPT.setText("Cargar");
+        jb_cargarPT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jb_cargarPTMouseClicked(evt);
             }
         });
 
@@ -3109,7 +3208,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(106, 106, 106)
                 .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jb_cargarPT)
                 .addGap(28, 28, 28))
         );
         jPanel39Layout.setVerticalGroup(
@@ -3117,7 +3216,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(jb_cargarPT)
                     .addComponent(jScrollPane30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -3284,9 +3383,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_salirMouseClicked
-        /*String[] a = {"Numero","ID", "Descripcion", "Deseos", "Limitaciones"};
-        String[] d = {"uuid","int", "text", "text", "text"};
-        cql.crear_tabla("Solicitudes", a, d, 0);
+        /*String[] a = {"Nombre","CIF", "Director", "Direccion", "Telefono", "Clave", "Correo"};
+        String[] d = {"text","int", "text", "text", "text", "text", "text"};
+        cql.crear_tabla("Empresas", a, d, 1);
          /*ArrayList b = new ArrayList();
         b.add("Juan");
         b.add(123);
@@ -3500,7 +3599,7 @@ public class Principal extends javax.swing.JFrame {
             tf_puesto.setText("");
             tf_salario.setText("");
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             JOptionPane.showMessageDialog(jd_admin2, "¡Datos Incorrectos!");
         }
     }//GEN-LAST:event_jb_agregar_personaMouseClicked
@@ -3523,10 +3622,19 @@ public class Principal extends javax.swing.JFrame {
             cql.session.execute("DELETE FROM PERSONASPRIMARIO WHERE ID=" + id);
             cql.session.execute("DELETE FROM PERSONASSECUNDARIO WHERE ID=" + id);
             cql.session.execute("DELETE FROM PERSONASTERCIARIAS WHERE ID=" + id);
+            cql.session.execute("DELETE FROM REQUISITOSEMPLEOS WHERE ID=" + id);
+            cql.session.execute("DELETE FROM PERSONASREQUISITOSCONDICIONES WHERE ID=" + id);
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT ID,numero FROM SOLICITUDES").all();
+            for (Row rs : r) {
+                if (rs.getInt(0) == Integer.parseInt(tf_id2.getText())) {
+                    cql.session.execute("DELETE FROM SOLICITUDES WHERE numero=" + rs.getUUID(1));
+                }
+            }
             JOptionPane.showMessageDialog(jd_admin2, "¡Persona eliminada exitosamente!");
             tf_id2.setText("");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(jd_admin2, "¡Datos Incorrectos!");
+            //e.printStackTrace();
+            JOptionPane.showMessageDialog(jd_admin2, "¡Error!");
         }
     }//GEN-LAST:event_jb_eliminar_personaMouseClicked
 
@@ -3604,7 +3712,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(jd_admin2, "¡La persona no existe!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             JOptionPane.showMessageDialog(jd_admin2, "¡Error!");
         }
     }//GEN-LAST:event_jb_modificar_personaMouseClicked
@@ -3623,7 +3731,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_agregar_empresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregar_empresaMouseClicked
         try {
-            String[] a = {"Nombre", "CIF", "Director", "Direccion", "Telefono", "Clave"};
+            String[] a = {"Nombre", "CIF", "Director", "Direccion", "Telefono", "Clave", "Correo"};
             ArrayList b = new ArrayList();
             b.add(tf_nombree.getText());
             b.add(Integer.parseInt(tf_cif.getText()));
@@ -3631,6 +3739,7 @@ public class Principal extends javax.swing.JFrame {
             b.add(ta_direccion.getText());
             b.add(tf_telefonoe.getText());
             b.add(tf_clavee.getText());
+            b.add(tf_correoe.getText());
             cql.insertar("Empresas", a, b);
             JOptionPane.showMessageDialog(jd_admin2, "¡Empresa Agregada Exitosamente!");
             tf_nombree.setText("");
@@ -3639,6 +3748,7 @@ public class Principal extends javax.swing.JFrame {
             ta_direccion.setText("");
             tf_telefonoe.setText("");
             tf_clavee.setText("");
+            tf_correoe.setText("");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(jd_admin2, "¡Datos incorrectos!");
         }
@@ -3648,9 +3758,16 @@ public class Principal extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(tf_cif1.getText());
             cql.session.execute("DELETE FROM EMPRESAS WHERE CIF=" + id);
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT CIF,numero FROM puestostrabajo").all();
+            for (Row rs : r) {
+                if (rs.getInt(0) == Integer.parseInt(tf_cif1.getText())) {
+                    cql.session.execute("DELETE FROM puestostrabajo WHERE numero=" + rs.getUUID(1));
+                }
+            }
             JOptionPane.showMessageDialog(jd_admin2, "¡Empresa eliminada exitosamente!");
             tf_cif1.setText("");
         } catch (Exception e) {
+            //e.printStackTrace();
             JOptionPane.showMessageDialog(jd_admin2, "¡Datos Incorrectos!");
         }
     }//GEN-LAST:event_jb_eliminar_empresaMouseClicked
@@ -3659,7 +3776,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt(tf_cif3.getText());
             //primera tabla
-            Row r = cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave FROM EMPRESAS WHERE CIF=" + id).one();
+            Row r = cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave,Correo FROM EMPRESAS WHERE CIF=" + id).one();
             String n = "";
             n = r.getString(0);
             if (!"".equals(n)) {
@@ -3670,6 +3787,7 @@ public class Principal extends javax.swing.JFrame {
                 ta_direccion1.setText(r.getString(3));
                 tf_telefonoe1.setText(r.getString(4));
                 tf_clavee1.setText(r.getString(5));
+                tf_correoe1.setText(r.getString(6));
                 //eliminar
                 cql.session.execute("DELETE FROM EMPRESAS WHERE CIF=" + id);
                 jb_modificar_aceptar1.setEnabled(true);
@@ -3680,14 +3798,14 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(jd_admin2, "¡La empresa no existe!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             JOptionPane.showMessageDialog(jd_admin2, "¡Error!");
         }
     }//GEN-LAST:event_jb_modificar_empresaMouseClicked
 
     private void jb_modificar_aceptar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificar_aceptar1MouseClicked
         try {
-            String[] a = {"Nombre", "CIF", "Director", "Direccion", "Telefono", "Clave"};
+            String[] a = {"Nombre", "CIF", "Director", "Direccion", "Telefono", "Clave", "Correo"};
             ArrayList b = new ArrayList();
             b.add(tf_nombree1.getText());
             b.add(Integer.parseInt(tf_cif2.getText()));
@@ -3695,6 +3813,7 @@ public class Principal extends javax.swing.JFrame {
             b.add(ta_direccion1.getText());
             b.add(tf_telefonoe1.getText());
             b.add(tf_clavee1.getText());
+            b.add(tf_correoe1.getText());
             cql.insertar("Empresas", a, b);
             JOptionPane.showMessageDialog(jd_admin2, "¡Empresa Modificada Exitosamente!");
             tf_nombree1.setText("");
@@ -3703,6 +3822,7 @@ public class Principal extends javax.swing.JFrame {
             ta_direccion1.setText("");
             tf_telefonoe1.setText("");
             tf_clavee1.setText("");
+            tf_correoe1.setText("");
             jb_modificar_aceptar1.setEnabled(false);
             jb_modificar_empresa.setEnabled(true);
             tf_cif3.setEnabled(true);
@@ -3849,11 +3969,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_cargar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargar3MouseClicked
         try {
-            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave FROM EMPRESAS").all();
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave,Correo FROM EMPRESAS").all();
             DefaultTableModel model = (DefaultTableModel) jt_eliminarE.getModel();
             model.setRowCount(0);
             for (Row rs : r) {
-                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6)};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -3862,11 +3982,11 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_cargar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargar4MouseClicked
         try {
-            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave FROM EMPRESAS").all();
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave,Correo FROM EMPRESAS").all();
             DefaultTableModel model = (DefaultTableModel) jt_listarE.getModel();
             model.setRowCount(0);
             for (Row rs : r) {
-                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6)};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -3900,20 +4020,38 @@ public class Principal extends javax.swing.JFrame {
                     + "Datos Sanitarios: \n Tipo de Sangre: " + r2.getString(4) + "\n Alergias: " + r2.getString(5) + "\n SSN: " + r2.getInt(6) + "\n \n"
                     + "Datos Legales: \n Antecedentes Penales: " + r2.getString(7) + "\n Servicion Militar: " + r2.getString(8) + "\n Antecedentes Policiales: " + r2.getString(9) + "\n \n"
                     + "Datos Academicos: \n Nivel de Educacion: " + r3.getString(0) + "\n Calificacion: " + r3.getDouble(1) + "\n Actividades Extracurrivulares: " + r3.getString(2) + "\n Conocimientos: " + r3.getString(3) + "\n \n"
-                    + "Datos Laborales: \n Empresa: " + r3.getString(4) + "\n Puesto: " + r3.getString(5) + "\n Salario: " + r3.getDouble(6));
+                    + "Datos Laborales: \n Empresa: " + r3.getString(4) + "\n Puesto: " + r3.getString(5) + "\n Salario: " + r3.getDouble(6) + "\n");
+            try {
+                ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT requisito FROM REQUISITOSEMPLEOS WHERE ID=" + jt_id.getText()).all();
+                String acum = " ";
+                for (Row rs : r) {
+                    acum += rs.getString(0) + " \n";
+                }
+                ta_listar.append("\nRequisitos de Empleo: \n" + acum);
+            } catch (Exception e) {
+            }
+            try {
+                ArrayList<Row> r4 = (ArrayList<Row>) cql.session.execute("SELECT requisito FROM PERSONASREQUISITOSCONDICIONES WHERE ID=" + jt_id.getText()).all();
+                String acum2 = " ";
+                for (Row rs : r4) {
+                    acum2 += rs.getString(0) + " \n";
+                }
+                ta_listar.append("\nRequisitos de Condiciones de Empleos: \n" + acum2);
+            } catch (Exception e) {
+            }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }//GEN-LAST:event_jb_buscarpersonasMouseClicked
 
     private void jb_cargar5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargar5MouseClicked
         try {
-            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave FROM EMPRESAS").all();
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Nombre,CIF,Director,Direccion,Telefono,Clave,Correo FROM EMPRESAS").all();
             DefaultTableModel model = (DefaultTableModel) jt_eliminarE1.getModel();
             model.setRowCount(0);
             for (Row rs : r) {
-                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)};
+                Object[] row = {rs.getString(0), rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(6)};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -3929,6 +4067,9 @@ public class Principal extends javax.swing.JFrame {
             int id2 = r.getInt(0);
             String clave2 = r.getString(1);
             if (id.equals(id2 + "") && clave.equals(clave2)) {
+                tf_usuario2.setText("");
+                pf_clave2.setText("");
+                jd_persona1.setVisible(false);
                 jd_persona2.pack();
                 jd_persona2.setModal(true);
                 jd_persona2.setLocationRelativeTo(this);
@@ -3937,7 +4078,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(jd_persona1, "¡Usuario o contraseña incorrecto!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }//GEN-LAST:event_jb_aceptar2MouseClicked
 
@@ -3950,6 +4091,9 @@ public class Principal extends javax.swing.JFrame {
             int cif2 = r.getInt(0);
             String clave2 = r.getString(1);
             if (cif.equals(cif2 + "") && clave.equals(clave2)) {
+                tf_usuario1.setText("");
+                pf_clave1.setText("");
+                jd_empresa1.setVisible(false);
                 jd_empresa2.pack();
                 jd_empresa2.setModal(true);
                 jd_empresa2.setLocationRelativeTo(this);
@@ -3961,14 +4105,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_aceptar1MouseClicked
 
-    private void tf_lugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lugarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_lugarActionPerformed
-
-    private void tf_lugar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_lugar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_lugar1ActionPerformed
-
     private void jb_agregar_solicitudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregar_solicitudMouseClicked
         try {
             UUID uuid = UUID.randomUUID();
@@ -3979,7 +4115,6 @@ public class Principal extends javax.swing.JFrame {
             ta_Deseos.setText("");
             ta_Limitaciones.setText("");
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(jd_persona2, "¡Datos Incorrectos!");
         }
     }//GEN-LAST:event_jb_agregar_solicitudMouseClicked
@@ -4013,7 +4148,6 @@ public class Principal extends javax.swing.JFrame {
             tf_sueldo.setText("");
             ta_condiciones.setText("");
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(jd_empresa2, "¡Datos Incorrectos!");
         }
     }//GEN-LAST:event_jb_agregar_puestoMouseClicked
@@ -4026,7 +4160,7 @@ public class Principal extends javax.swing.JFrame {
 
             for (Row rs : r) {
                 if ((rs.getInt(3) + "").equals(cifEmpresa)) {
-                    Object[] row = {rs.getUUID(0), rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDouble(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)};
+                    Object[] row = {rs.getUUID(0), rs.getString(1), rs.getString(2), rs.getString(4), rs.getDouble(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)};
                     df.addRow(row);
                 }
 
@@ -4036,23 +4170,21 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_cargarpuestoMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jb_cargarPTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargarPTMouseClicked
         try {
-            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT id,DESCRIPCION,DESEOS, LIMITACIONES FROM SOLICITUDES").all();
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Numero,id,DESCRIPCION,DESEOS, LIMITACIONES FROM SOLICITUDES").all();
             DefaultTableModel df = (DefaultTableModel) jt_listarpersonas.getModel();
             df.setRowCount(0);
-
             for (Row rs : r) {
-                if ((rs.getInt(0) + "").equals(idEmpleado)) {
-                    Object[] row = {rs.getString(1), rs.getString(2), rs.getString(3)};
+                if ((rs.getInt(1) + "").equals(idEmpleado)) {
+                    Object[] row = {rs.getUUID(0), rs.getString(2), rs.getString(3), rs.getString(4)};
                     df.addRow(row);
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jb_cargarPTMouseClicked
 
     private void jb_modificarPuestosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_modificarPuestosMouseClicked
         try {
@@ -4093,7 +4225,7 @@ public class Principal extends javax.swing.JFrame {
             cb_modificarE.setSelectedItem(r.getString(0));
             ta_descripcion1.setText(r.getString(1));
             tf_lugar1.setText(r.getString(2));
-            tf_sueldo1.setText(r.getDouble(3)+"");
+            tf_sueldo1.setText(r.getDouble(3) + "");
             ta_requisito1.setText(r.getString(4));
             ta_academico1.setText(r.getString(5));
             ta_sanitario1.setText(r.getString(6));
@@ -4101,14 +4233,14 @@ public class Principal extends javax.swing.JFrame {
             ta_profesionales1.setText(r.getString(8));
             ta_laborales1.setText(r.getString(9));
             ta_condiciones1.setText(r.getString(10));
-            
+
             jb_aceptarE.setEnabled(true);
             jb_modificarE.setEnabled(false);
             tf_numeroE.setEnabled(false);
-            
+
             JOptionPane.showMessageDialog(jd_empresa2, "¡Datos cargados exitosamente!");
         } catch (Exception e) {
-           
+
         }
     }//GEN-LAST:event_jb_modificarEMouseClicked
 
@@ -4125,7 +4257,7 @@ public class Principal extends javax.swing.JFrame {
             cql.session.execute("UPDATE PUESTOSTRABAJO SET R_PROFESIONALES='" + ta_profesionales1.getText() + "' WHERE NUMERO=" + tf_numeroE.getText());
             cql.session.execute("UPDATE PUESTOSTRABAJO SET R_LABORALES='" + ta_laborales1.getText() + "' WHERE NUMERO=" + tf_numeroE.getText());
             cql.session.execute("UPDATE PUESTOSTRABAJO SET CONDICIONES='" + ta_condiciones1.getText() + "' WHERE NUMERO=" + tf_numeroE.getText());
-            
+
             ta_descripcion1.setText("");
             tf_lugar1.setText("");
             tf_sueldo1.setText("");
@@ -4137,11 +4269,11 @@ public class Principal extends javax.swing.JFrame {
             ta_laborales1.setText("");
             ta_condiciones1.setText("");
             tf_numeroE.setText("");
-            
+
             jb_aceptarE.setEnabled(false);
             jb_modificarE.setEnabled(true);
             tf_numeroE.setEnabled(true);
-            
+
             JOptionPane.showMessageDialog(jd_empresa2, "¡Puesto de trabajo modificado exitosamente!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(jd_empresa2, "¡Datos incorrectos!");
@@ -4165,6 +4297,145 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jd_empresa2, "¡Datos incorrectos!");
         }
     }//GEN-LAST:event_jb_eliminarSolicitudMouseClicked
+
+    private void jb_cargar_tablasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cargar_tablasMouseClicked
+        try {
+            ArrayList<Row> r = (ArrayList<Row>) cql.session.execute("SELECT Numero, Tipo, Descripcion, CIF, Lugar, Sueldo,R_Personal, R_Academico, R_Saniarios, R_Legales, R_Profesionales, R_Laborales,Condiciones FROM PUESTOSTRABAJO").all();
+            DefaultTableModel df = (DefaultTableModel) jt_listarPuesto1.getModel();
+            df.setRowCount(0);
+            for (Row rs : r) {
+                Object[] row = {rs.getUUID(0), rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getDouble(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)};
+                df.addRow(row);
+            }
+            ArrayList<Row> r2 = (ArrayList<Row>) cql.session.execute("SELECT Numero,id,DESCRIPCION,DESEOS, LIMITACIONES FROM SOLICITUDES").all();
+            DefaultTableModel df2 = (DefaultTableModel) jt_listarpersonas1.getModel();
+            df2.setRowCount(0);
+            for (Row rs2 : r2) {
+                Object[] row2 = {rs2.getUUID(0), rs2.getInt(1), rs2.getString(2), rs2.getString(3), rs2.getString(4)};
+                df2.addRow(row2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(jd_admin2, "¡Error!");
+        }
+    }//GEN-LAST:event_jb_cargar_tablasMouseClicked
+
+    private void jb_seleccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_seleccionMouseClicked
+        try {
+            DefaultTableModel m = (DefaultTableModel) jt_listarpersonas1.getModel();
+            int id_temp = (int) m.getValueAt(jt_listarpersonas1.getSelectedRow(), 1);
+            Row r = cql.session.execute("SELECT Nombre, Apellido, ID, FechaNacimiento, Genero, Telefono, Direccion, Correo, Clave FROM PERSONASPRIMARIO WHERE ID =" + id_temp).one();
+            Row r2 = cql.session.execute("SELECT ID_F, Relacion_F, Nombre_F, Apellido_F, TipoSangre_S, Alergias_S, SSN_S, AntecedentesPenales_L, ServicioM_L, AntecedentesPoliciales_L FROM PERSONASSECUNDARIO").one();
+            Row r3 = cql.session.execute("SELECT NVLEducacion_A, Calificacion_A, Extracurriculares_A, Conocimientos_P, Empresa_La, Puesto_La, Salario_La FROM PERSONASTERCIARIAS").one();
+            ArrayList<Row> r4 = (ArrayList<Row>) cql.session.execute("SELECT Requisito FROM RequisitosEmpleos").all();
+            ArrayList<Row> r5 = (ArrayList<Row>) cql.session.execute("SELECT Requisito FROM PersonasRequisitosCondiciones").all();
+
+            DefaultTableModel m2 = (DefaultTableModel) jt_listarpersonas1.getModel();
+            int cif_temp = (int) m2.getValueAt(jt_listarPuesto1.getSelectedRow(), 3);
+            Row r6 = cql.session.execute("Select cif,correo,direccion,director,nombre,telefono FROM EMPRESA where CIF=" + cif_temp).one();
+
+            String correoEnvia = "empleoshn123@hotmail.com";
+            String clave = "empleos123";
+            String correo = r.getString(7);
+
+            Properties properties = new Properties();
+            properties.put("mail.smtp.host", "smtp.live.com");
+            properties.put("mail.smtp.port", "587");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.user", correoEnvia);
+            properties.put("mail.password", clave);
+
+            Session session = Session.getInstance(properties, null);
+            int aviso = 0;
+
+            //correo al posible empleado
+            try {
+                MimeMessage mimemessage = new MimeMessage(session);
+                mimemessage.setFrom(new InternetAddress(correoEnvia, "user"));
+                InternetAddress[] internetAddresses = {new InternetAddress(correo)};
+                mimemessage.setRecipients(Message.RecipientType.TO, internetAddresses);
+                mimemessage.setSubject("Empresa");
+                MimeBodyPart mimebodypart = new MimeBodyPart();
+                mimebodypart.setText("Estimado(a) " + r.getString(0) + " " + r.getString(1) + " \n"
+                        + "La posible empresa que lo contratara sera " + r6.getString(4) + "\n"
+                        + "CIF: " + r6.getString(0) + "\n"
+                        + "Correo: " + r6.getString(1) + "\n"
+                        + "Direccion: " + r6.getString(2) + "\n"
+                        + "Director: " + r6.getString(3) + "\n"
+                        + "Telefono: " + r6.getString(5) + "");
+
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(mimebodypart);
+                mimemessage.setContent(multipart);
+                Transport transport = session.getTransport("smtp");
+                transport.connect(correoEnvia, clave);
+                transport.sendMessage(mimemessage, mimemessage.getAllRecipients());
+                transport.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error!");
+                aviso = 1;
+            }
+
+            if (aviso == 0) {
+                JOptionPane.showMessageDialog(this, "¡Correo Enviado Exitosamente!");
+            }
+
+            //correo a la empresa
+            
+            String correoEnvia1 = "empleoshn123@hotmail.com";
+            String clave1 = "empleos123";
+            String correo1 = r.getString(7);
+
+            Properties properties1 = new Properties();
+            properties1.put("mail.smtp.host", "smtp.live.com");
+            properties1.put("mail.smtp.port", "587");
+            properties1.put("mail.smtp.starttls.enable", "true");
+            properties1.put("mail.smtp.auth", "true");
+            properties1.put("mail.user", correoEnvia1);
+            properties1.put("mail.password", clave1);
+
+            Session session1 = Session.getInstance(properties1, null);
+            int aviso1 = 0;
+            
+            try {
+                MimeMessage mimemessage = new MimeMessage(session1);
+                mimemessage.setFrom(new InternetAddress(correoEnvia1, "user"));
+                InternetAddress[] internetAddresses = {new InternetAddress(correo1)};
+                mimemessage.setRecipients(Message.RecipientType.TO, internetAddresses);
+                mimemessage.setSubject("Empleado candidato");
+                MimeBodyPart mimebodypart = new MimeBodyPart();
+                mimebodypart.setText("Estimado(a) " + r6.getString(4) + " \n"
+                        + "Un posible candidato para el puesto es: " + r.getString(0) +" "+r.getString(1)+ "\n"
+                        + "ID: " + r6.getString(2) + "\n"
+                        + "Correo: " + r6.getString(1) + "\n"
+                        + "Direccion: " + r6.getString(6) + "\n"
+                        /*+ "Director: " + r6.getString(3) + "\n"*/
+                        + "Genero: " + r6.getString(4) + "\n"
+                        + "Telefono: "+r.getString(5));
+
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(mimebodypart);
+                mimemessage.setContent(multipart);
+                Transport transport = session1.getTransport("smtp");
+                transport.connect(correoEnvia1, clave1);
+                transport.sendMessage(mimemessage, mimemessage.getAllRecipients());
+                transport.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error!");
+                aviso1 = 1;
+            }
+            if (aviso1 == 0) {
+                JOptionPane.showMessageDialog(this, "¡Correo Enviado Exitosamente!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(jd_admin2, "¡Error!");
+        }
+    }//GEN-LAST:event_jb_seleccionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -4210,7 +4481,6 @@ public class Principal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dc_fecha1;
     private javax.swing.ButtonGroup educacion;
     private javax.swing.ButtonGroup genero;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4236,10 +4506,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel118;
     private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel120;
     private javax.swing.JLabel jLabel121;
     private javax.swing.JLabel jLabel122;
     private javax.swing.JLabel jLabel123;
     private javax.swing.JLabel jLabel124;
+    private javax.swing.JLabel jLabel125;
     private javax.swing.JLabel jLabel128;
     private javax.swing.JLabel jLabel129;
     private javax.swing.JLabel jLabel13;
@@ -4419,7 +4691,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane36;
     private javax.swing.JScrollPane jScrollPane37;
     private javax.swing.JScrollPane jScrollPane38;
+    private javax.swing.JScrollPane jScrollPane39;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane40;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -4444,7 +4718,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_cargar3;
     private javax.swing.JButton jb_cargar4;
     private javax.swing.JButton jb_cargar5;
+    private javax.swing.JButton jb_cargarPT;
     private javax.swing.JButton jb_cargarPersonas;
+    private javax.swing.JButton jb_cargar_tablas;
     private javax.swing.JButton jb_cargarpuesto;
     private javax.swing.JButton jb_eliminarPuesto;
     private javax.swing.JButton jb_eliminarSolicitud;
@@ -4459,6 +4735,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_modificar_persona;
     private javax.swing.JButton jb_persona;
     private javax.swing.JButton jb_salir;
+    private javax.swing.JButton jb_seleccion;
     private javax.swing.JDialog jd_admin1;
     private javax.swing.JDialog jd_admin2;
     private javax.swing.JDialog jd_empresa1;
@@ -4472,7 +4749,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jt_listarE;
     private javax.swing.JTable jt_listarP;
     private javax.swing.JTable jt_listarPuesto;
+    private javax.swing.JTable jt_listarPuesto1;
     private javax.swing.JTable jt_listarpersonas;
+    private javax.swing.JTable jt_listarpersonas1;
     private javax.swing.ButtonGroup penales;
     private javax.swing.JPasswordField pf_clave;
     private javax.swing.JPasswordField pf_clave1;
@@ -4548,6 +4827,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tf_clavee1;
     private javax.swing.JTextField tf_correo;
     private javax.swing.JTextField tf_correo1;
+    private javax.swing.JTextField tf_correoe;
+    private javax.swing.JTextField tf_correoe1;
     private javax.swing.JTextField tf_direccion;
     private javax.swing.JTextField tf_direccion1;
     private javax.swing.JTextField tf_director;
