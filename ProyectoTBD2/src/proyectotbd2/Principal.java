@@ -4274,9 +4274,10 @@ public class Principal extends javax.swing.JFrame {
             ArrayList<Row> r4 = (ArrayList<Row>) cql.session.execute("SELECT Requisito FROM RequisitosEmpleos").all();
             ArrayList<Row> r5 = (ArrayList<Row>) cql.session.execute("SELECT Requisito FROM PersonasRequisitosCondiciones").all();
 
-            DefaultTableModel m2 = (DefaultTableModel) jt_listarpersonas1.getModel();
+            DefaultTableModel m2 = (DefaultTableModel) jt_listarPuesto1.getModel();
+            System.out.println( m2.getValueAt(jt_listarPuesto1.getSelectedRow(), 3));
             int cif_temp = (int) m2.getValueAt(jt_listarPuesto1.getSelectedRow(), 3);
-            Row r6 = cql.session.execute("Select cif,correo,direccion,director,nombre,telefono FROM EMPRESA where CIF=" + cif_temp).one();
+            Row r6 = cql.session.execute("Select cif,correo,direccion,director,nombre,telefono FROM EMPRESAS where CIF=" + cif_temp).one();
 
             String correoEnvia = "empleoshn123@hotmail.com";
             String clave = "empleos123";
@@ -4305,7 +4306,7 @@ public class Principal extends javax.swing.JFrame {
                         + "Le escribimos de parte de EmpleosHN para informale que su solicitud de trabajo está en proceso de aceptación." + "\n"
                         + "La empresa " + r6.getString(4) + " cuenta con su curriculum actualmente y recibirá una respuesta por parte de ella acerca del empleo." + "\n"
                         + "-> Información de la Empresa " + r6.getString(4) + " :\n"
-                        + "CIF: " + r6.getString(0) + "\n"
+                        + "CIF: " + r6.getInt(0) + "\n"
                         + "Correo: " + r6.getString(1) + "\n"
                         + "Direccion: " + r6.getString(2) + "\n"
                         + "Director: " + r6.getString(3) + "\n"
@@ -4332,7 +4333,7 @@ public class Principal extends javax.swing.JFrame {
             //correo a la empresa
             String correoEnvia1 = "empleoshn123@hotmail.com";
             String clave1 = "empleos123";
-            String correo1 = r.getString(7);
+            String correo1 = r6.getString(1);
 
             Properties properties1 = new Properties();
             properties1.put("mail.smtp.host", "smtp.live.com");
