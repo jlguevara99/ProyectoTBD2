@@ -159,8 +159,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane29 = new javax.swing.JScrollPane();
         jt_listarPuesto = new javax.swing.JTable();
         jb_cargarpuesto = new javax.swing.JButton();
-        jPanel25 = new javax.swing.JPanel();
-        jPanel30 = new javax.swing.JPanel();
         jd_admin2 = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -432,8 +430,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane30 = new javax.swing.JScrollPane();
         jt_listarpersonas = new javax.swing.JTable();
         jb_cargarPT = new javax.swing.JButton();
-        jPanel36 = new javax.swing.JPanel();
-        jPanel40 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         penales = new javax.swing.ButtonGroup();
         servicio = new javax.swing.ButtonGroup();
@@ -1241,32 +1237,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Listar", jPanel24);
-
-        jPanel30.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
-        jPanel30.setLayout(jPanel30Layout);
-        jPanel30Layout.setHorizontalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 702, Short.MAX_VALUE)
-        );
-        jPanel30Layout.setVerticalGroup(
-            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 515, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("Resultados", jPanel25);
 
         javax.swing.GroupLayout jd_empresa2Layout = new javax.swing.GroupLayout(jd_empresa2.getContentPane());
         jd_empresa2.getContentPane().setLayout(jd_empresa2Layout);
@@ -3234,32 +3204,6 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Listar", jPanel35);
 
-        jPanel40.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
-        jPanel40.setLayout(jPanel40Layout);
-        jPanel40Layout.setHorizontalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
-        );
-        jPanel40Layout.setVerticalGroup(
-            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
-        jPanel36.setLayout(jPanel36Layout);
-        jPanel36Layout.setHorizontalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel36Layout.setVerticalGroup(
-            jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Resultados", jPanel36);
-
         javax.swing.GroupLayout jd_persona2Layout = new javax.swing.GroupLayout(jd_persona2.getContentPane());
         jd_persona2.getContentPane().setLayout(jd_persona2Layout);
         jd_persona2Layout.setHorizontalGroup(
@@ -4324,7 +4268,7 @@ public class Principal extends javax.swing.JFrame {
         try {
             DefaultTableModel m = (DefaultTableModel) jt_listarpersonas1.getModel();
             int id_temp = (int) m.getValueAt(jt_listarpersonas1.getSelectedRow(), 1);
-            Row r = cql.session.execute("SELECT Nombre, Apellido, ID, FechaNacimiento, Genero, Telefono, Direccion, Correo, Clave FROM PERSONASPRIMARIO WHERE ID =" + id_temp).one();
+            Row r = cql.session.execute("SELECT Nombre, Apellido, ID, FechaNacimiento, Genero, Telefono, Direccion, Correo FROM PERSONASPRIMARIO WHERE ID =" + id_temp).one();
             Row r2 = cql.session.execute("SELECT ID_F, Relacion_F, Nombre_F, Apellido_F, TipoSangre_S, Alergias_S, SSN_S, AntecedentesPenales_L, ServicioM_L, AntecedentesPoliciales_L FROM PERSONASSECUNDARIO").one();
             Row r3 = cql.session.execute("SELECT NVLEducacion_A, Calificacion_A, Extracurriculares_A, Conocimientos_P, Empresa_La, Puesto_La, Salario_La FROM PERSONASTERCIARIAS").one();
             ArrayList<Row> r4 = (ArrayList<Row>) cql.session.execute("SELECT Requisito FROM RequisitosEmpleos").all();
@@ -4355,16 +4299,19 @@ public class Principal extends javax.swing.JFrame {
                 mimemessage.setFrom(new InternetAddress(correoEnvia, "user"));
                 InternetAddress[] internetAddresses = {new InternetAddress(correo)};
                 mimemessage.setRecipients(Message.RecipientType.TO, internetAddresses);
-                mimemessage.setSubject("Empresa");
+                mimemessage.setSubject("Solicitud de Trabajo en Proceso");
                 MimeBodyPart mimebodypart = new MimeBodyPart();
                 mimebodypart.setText("Estimado(a) " + r.getString(0) + " " + r.getString(1) + " \n"
-                        + "La posible empresa que lo contratara sera " + r6.getString(4) + "\n"
+                        + "Le escribimos de parte de EmpleosHN para informale que su solicitud de trabajo está en proceso de aceptación." + "\n"
+                        + "La empresa " + r6.getString(4) + " cuenta con su curriculum actualmente y recibirá una respuesta por parte de ella acerca del empleo." + "\n"
+                        + "-> Información de la Empresa " + r6.getString(4) + " :\n"
                         + "CIF: " + r6.getString(0) + "\n"
                         + "Correo: " + r6.getString(1) + "\n"
                         + "Direccion: " + r6.getString(2) + "\n"
                         + "Director: " + r6.getString(3) + "\n"
-                        + "Telefono: " + r6.getString(5) + "");
-
+                        + "Telefono: " + r6.getString(5) + ""
+                        + "Gracias por usar EmpleosHN."
+                );
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(mimebodypart);
                 mimemessage.setContent(multipart);
@@ -4383,7 +4330,6 @@ public class Principal extends javax.swing.JFrame {
             }
 
             //correo a la empresa
-            
             String correoEnvia1 = "empleoshn123@hotmail.com";
             String clave1 = "empleos123";
             String correo1 = r.getString(7);
@@ -4398,22 +4344,52 @@ public class Principal extends javax.swing.JFrame {
 
             Session session1 = Session.getInstance(properties1, null);
             int aviso1 = 0;
-            
+
             try {
                 MimeMessage mimemessage = new MimeMessage(session1);
                 mimemessage.setFrom(new InternetAddress(correoEnvia1, "user"));
                 InternetAddress[] internetAddresses = {new InternetAddress(correo1)};
                 mimemessage.setRecipients(Message.RecipientType.TO, internetAddresses);
-                mimemessage.setSubject("Empleado candidato");
+                mimemessage.setSubject("Empleado Candidato");
                 MimeBodyPart mimebodypart = new MimeBodyPart();
                 mimebodypart.setText("Estimado(a) " + r6.getString(4) + " \n"
-                        + "Un posible candidato para el puesto es: " + r.getString(0) +" "+r.getString(1)+ "\n"
-                        + "ID: " + r6.getString(2) + "\n"
-                        + "Correo: " + r6.getString(1) + "\n"
-                        + "Direccion: " + r6.getString(6) + "\n"
-                        /*+ "Director: " + r6.getString(3) + "\n"*/
-                        + "Genero: " + r6.getString(4) + "\n"
-                        + "Telefono: "+r.getString(5));
+                        + "Le escribimos de parte de EmpleosHN para informale que contamos con un posible candidato para su puesto de trabajo." + "\n"
+                        + "-> Datos del Posible Candidato: " + "\n"
+                        + " - Datos Personales: " + "\n"
+                        + "   Nombre: " + r.getString(0) + "\n"
+                        + "   Apellido: " + r.getString(1) + "\n"
+                        + "   ID: " + r.getInt(2) + "\n"
+                        + "   Fecha de Nacimiento: " + r.getTimestamp(3) + "\n"
+                        + "   Género: " + r.getString(4) + "\n"
+                        + "   Telefono: " + r.getString(5) + "\n"
+                        + "   Dirección: " + r.getString(6) + "\n"
+                        + "   Correo: " + r.getString(7) + "\n"
+                        + " - Datos Familiares: " + "\n"
+                        + "   ID: " + r2.getInt(0) + "\n"
+                        + "   Relación: " + r2.getString(1) + "\n"
+                        + "   Nombre: " + r2.getString(2) + "\n"
+                        + "   Apellido: " + r2.getString(3) + "\n"
+                        + " - Datos Sanitarios: " + "\n"
+                        + "   Tipo de Sangre: " + r2.getString(4) + "\n"
+                        + "   Alergias: " + r2.getString(5) + "\n"
+                        + "   SSN: " + r2.getInt(6) + "\n"
+                        + " - Datos Legales: " + "\n"
+                        + "   Antecedentes Personales: " + r2.getString(7) + "\n"
+                        + "   Servicio Militar: " + r2.getString(8) + "\n"
+                        + "   Antecedentes Policiales: " + r2.getString(9) + "\n"
+                        + " - Datos Académicos: " + "\n"
+                        + "   Nivel de Educación: " + r3.getString(0) + "\n"
+                        + "   Calificación: " + r3.getDouble(1) + "\n"
+                        + "   Actividades Extracurriculares: " + r3.getString(2) + "\n"
+                        + " - Datos Profesionales: " + "\n"
+                        + "   Conocimientos: " + r3.getString(3) + "\n"
+                        + " - Datos Laborales: " + "\n"
+                        + "   Empresa: " + r3.getString(4) + "\n"
+                        + "   Puesto: " + r3.getString(5) + "\n"
+                        + "   Salario: " + r3.getDouble(6) + "\n"
+                        + "El posible candidato estará espereando su respuesta en los próximos dias." + "\n"
+                        + "Gracias por usar EmpleosHN."
+                );
 
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(mimebodypart);
@@ -4636,24 +4612,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
     private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
-    private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
